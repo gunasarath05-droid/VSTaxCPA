@@ -95,10 +95,11 @@ export default function Header() {
             <Image
               src={logoSrc}
               alt="VS Tax CPA LLC"
-              width={220}
-              height={60}
+              width={260}
+              height={80}
               priority
-              className="h-20 sm:h-20 lg:h-20 w-auto object-contain object-left transition-all duration-300"
+              style={{ height: "70px", width: "auto" }}
+              className="h-14 sm:h-16 lg:h-20 w-auto object-contain object-left transition-all duration-300"
             />
           </Link>
 
