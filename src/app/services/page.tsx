@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { servicesData } from "@/constants/servicesData";
 import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
+import darkbg from "@/assets/images/darkbg.png";
 
 export const metadata: Metadata = {
   title: "Professional CPA & Tax Services | VS Tax CPA LLC",
@@ -14,35 +16,27 @@ export default function ServicesListingPage() {
   return (
     <>
       {/* ── Services Hub Hero ── */}
-      <section className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 flex items-center overflow-hidden bg-gradient-to-br from-[#122115] via-[#1e3a24] to-[#2d5234]">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-10 pointer-events-none bg-[radial-gradient(circle,#9CB05A,transparent_70%)]" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-10 pointer-events-none bg-[radial-gradient(circle,#d4af37,transparent_70%)]" />
+      <section className="relative pt-36 pb-20 flex flex-col items-center justify-center text-center overflow-hidden">
+        <Image src={darkbg} alt="Services | VS Tax CPA LLC" fill priority className="object-cover object-center pointer-events-none" />
+        <div className="absolute inset-0 bg-[#0E1710]/30 pointer-events-none" />
 
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M60 0H0v60' fill='none' stroke='%239CB05A' stroke-width='0.5'/%3E%3C/svg%3E")`,
-            backgroundSize: "60px 60px",
-          }}
-        />
-
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10 text-center w-full">
-          <div className="flex flex-col items-center gap-4 sm:gap-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center gap-6">
+          <div className="flex flex-col items-center gap-4 sm:gap-5">
             <nav className="flex items-center gap-2 text-white/60 text-xs font-semibold">
               <Link href="/" className="hover:text-white transition-colors">Home</Link>
               <span>/</span>
-              <span className="text-secondary">Services</span>
+              <span style={{ color: "#9CB05A" }}>Services</span>
             </nav>
 
-            <span className="inline-flex items-center rounded-full bg-white/10 text-white/80 px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-widest border border-white/20 backdrop-blur-sm">
+            <span className="inline-flex items-center rounded-full bg-white/10 text-white/80 px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-widest border border-white/20">
               Comprehensive CPA Solutions
             </span>
 
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white leading-[1.15] sm:leading-[1.1] font-figtree tracking-tight max-w-4xl">
-              Strategic Tax, Accounting &amp; <span className="text-secondary">Advisory Services</span>
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white leading-[1.15] sm:leading-[1.1] font-figtree tracking-tight">
+              Strategic Tax, Accounting &amp; <span style={{ color: "#9CB05A" }}>Advisory Services</span>
             </h1>
 
-            <p className="text-white/75 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl font-manrope">
+            <p className="text-white/70 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl">
               Tailored financial strategies delivered with dual CPA &amp; CA certification, proactive year-round planning, and unmatched precision for businesses and individuals.
             </p>
           </div>

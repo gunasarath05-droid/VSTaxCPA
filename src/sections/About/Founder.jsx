@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FaLinkedinIn, FaInstagram, FaFacebookF } from "react-icons/fa";
 import { FiCheckCircle, FiAward, FiArrowRight, FiStar } from "react-icons/fi";
 import ceo from "../../assets/images/ceo.png";
+import lightbg from "../../assets/images/about/lightbg.png";
 
 export default function Founder() {
   const credentials = [
@@ -23,12 +24,23 @@ export default function Founder() {
   ];
 
   return (
-    <section className="py-16 sm:py-24 bg-white relative overflow-hidden">
+    <section className="py-16 sm:py-24 relative overflow-hidden">
+      {/* Light texture background — unoptimized to preserve exact quality */}
+      <Image
+        src={lightbg}
+        alt=""
+        fill
+        priority
+        unoptimized
+        className="object-cover object-center pointer-events-none"
+        style={{ zIndex: 0 }}
+      />
+
       {/* Background Decorative */}
       <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.04] pointer-events-none bg-[radial-gradient(circle,#1e3a24,transparent_70%)]" />
       <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full opacity-[0.03] pointer-events-none bg-[radial-gradient(circle,#9CB05A,transparent_70%)]" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
 
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">

@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiPlus, FiMinus, FiHelpCircle, FiArrowRight, FiSearch } from "react-icons/fi";
+import darkbg from "@/assets/images/darkbg.png";
 
 const faqCategories = [
   {
@@ -120,9 +122,9 @@ export default function FAQPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 bg-gradient-to-br from-[#122115] via-[#1e3a24] to-[#2d5234] text-white overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-10 pointer-events-none bg-[radial-gradient(circle,#9CB05A,transparent_70%)]" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-10 pointer-events-none bg-[radial-gradient(circle,#d4af37,transparent_70%)]" />
+      <section className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 text-white overflow-hidden">
+        <Image src={darkbg} alt="FAQ | VS Tax CPA LLC" fill priority className="object-cover object-center pointer-events-none" />
+        <div className="absolute inset-0 bg-[#0E1710]/30 pointer-events-none" />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10 text-center">
           <nav className="flex items-center justify-center gap-2 text-white/60 text-xs font-semibold mb-4">

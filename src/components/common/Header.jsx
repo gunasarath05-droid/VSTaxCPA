@@ -3,21 +3,69 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import dropdownImg from "@/assets/images/dropdown.png";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoCloseOutline } from "react-icons/io5";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYelp } from "react-icons/fa";
-import { FiChevronDown, FiPhone, FiMail, FiMapPin, FiClock } from "react-icons/fi";
+import {
+  FiChevronDown,
+  FiPhone,
+  FiMail,
+  FiMapPin,
+  FiClock,
+  FiFileText,
+  FiTrendingUp,
+  FiUsers,
+  FiDollarSign,
+  FiHeadphones,
+  FiShield,
+  FiPhoneCall
+} from "react-icons/fi";
+import { LuCalculator, LuFileCheck } from "react-icons/lu";
+import { RiShieldCheckLine } from "react-icons/ri";
 import { usePathname } from "next/navigation";
 
 const serviceLinks = [
-  { name: "Tax Compliance", href: "/services/tax-compliance" },
-  { name: "Tax Planning & Advisory", href: "/services/tax-planning" },
-  { name: "Business Entity Formation", href: "/services/business-formation" },
-  { name: "Payroll Set Up (Gusto)", href: "/services/payroll-services" },
-  { name: "Bookkeeping & Accounting", href: "/services/bookkeeping" },
-  { name: "Fractional CFO Services", href: "/services/fractional-cfo" },
-  { name: "IRS Representation", href: "/services/irs-representation" },
-  { name: "Sales Tax & 1099 Filing", href: "/services/sales-tax-1099" },
+  {
+    name: "Tax Compliance",
+    href: "/services/tax-compliance",
+    icon: <FiFileText className="text-lg" />,
+  },
+  {
+    name: "Tax Planning & Advisory",
+    href: "/services/tax-planning",
+    icon: <FiTrendingUp className="text-lg" />,
+  },
+  {
+    name: "Business Entity Formation",
+    href: "/services/business-formation",
+    icon: <FiUsers className="text-lg" />,
+  },
+  {
+    name: "Payroll Set Up (Gusto)",
+    href: "/services/payroll-services",
+    icon: <FiDollarSign className="text-lg" />,
+  },
+  {
+    name: "Bookkeeping & Accounting",
+    href: "/services/bookkeeping",
+    icon: <LuCalculator className="text-lg" />,
+  },
+  {
+    name: "Fractional CFO Services",
+    href: "/services/fractional-cfo",
+    icon: <FiHeadphones className="text-lg" />,
+  },
+  {
+    name: "IRS Representation",
+    href: "/services/irs-representation",
+    icon: <FiShield className="text-lg" />,
+  },
+  {
+    name: "Sales Tax & 1099 Filing",
+    href: "/services/sales-tax-1099",
+    icon: <LuFileCheck className="text-lg" />,
+  },
 ];
 
 const navLinks = [
@@ -135,66 +183,97 @@ export default function Header() {
                     />
 
                     {/* Transparent bridge — fills the gap so mouse doesn't leave on way to dropdown */}
-                    <div className="absolute top-full left-0 w-full h-2" />
+                    <div className="absolute top-full left-0 w-full h-3" />
 
                     {/* ── Mega Dropdown ── */}
                     <div
-                      className={`absolute top-[calc(100%+2px)] left-1/2 -translate-x-1/2 w-[600px] bg-[#121E14]/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-[#9CB05A]/25 overflow-hidden transition-all duration-200 origin-top ${
+                      className={`absolute top-[calc(100%+6px)] left-1/2 -translate-x-1/2 w-[820px] xl:w-[850px] bg-[#0A140D] rounded-[22px] shadow-[0_25px_70px_-15px_rgba(0,0,0,0.85)] border border-[#9CB05A]/25 overflow-hidden transition-all duration-200 origin-top bg-contain bg-right ${
                         isServicesOpen
                           ? "opacity-100 scale-100 pointer-events-auto translate-y-0"
                           : "opacity-0 scale-95 pointer-events-none -translate-y-1"
                       }`}
+                      style={{
+                        backgroundImage: `url(${dropdownImg.src})`,
+                      }}
                     >
                       <div className="flex">
                         {/* Left: Service Links 2-column grid */}
-                        <div className="flex-1 p-4">
-                          <div className="grid grid-cols-2 gap-0.5">
-                            {serviceLinks.map((service) => (
-                              <Link
-                                key={service.href}
-                                href={service.href}
-                                onClick={() => setIsServicesOpen(false)}
-                                className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[12.5px] font-semibold font-figtree transition-all duration-150 group/item ${
-                                  pathname === service.href
-                                    ? "bg-[#9CB05A] text-[#0E1710] font-bold"
-                                    : "text-[#FAF9F2]/90 hover:bg-[#1C2C1E] hover:text-[#9CB05A]"
-                                }`}
-                              >
-                                <span
-                                  className={`w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors ${
-                                    pathname === service.href
-                                      ? "bg-[#0E1710]"
-                                      : "bg-[#9CB05A]/40 group-hover/item:bg-[#9CB05A]"
+                        <div className="flex-1 p-4 sm:p-4.5 bg-[#0A140D]/85 backdrop-blur-md border-r border-[#9CB05A]/15">
+                          <div className="grid grid-cols-2 gap-1.5">
+                            {serviceLinks.map((service) => {
+                              const isCurrent = pathname === service.href;
+                              return (
+                                <Link
+                                  key={service.href}
+                                  href={service.href}
+                                  onClick={() => setIsServicesOpen(false)}
+                                  className={`group/item flex items-center gap-2.5 px-2.5 py-1.5 rounded-xl transition-all duration-200 ${
+                                    isCurrent
+                                      ? "bg-[#18281B] border border-[#9CB05A]/40"
+                                      : "hover:bg-[#152318] border border-transparent hover:border-[#9CB05A]/20"
                                   }`}
-                                />
-                                {service.name}
-                              </Link>
-                            ))}
+                                >
+                                  {/* Icon Circle */}
+                                  <div
+                                    className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
+                                      isCurrent
+                                        ? "bg-[#9CB05A] text-[#0E1710] shadow-md"
+                                        : "bg-[#152418] text-[#9CB05A] border border-[#9CB05A]/30 group-hover/item:bg-[#9CB05A] group-hover/item:text-[#0E1710] group-hover/item:border-transparent group-hover/item:scale-105 shadow-sm"
+                                    }`}
+                                  >
+                                    {service.icon}
+                                  </div>
+
+                                  {/* Title */}
+                                  <h5
+                                    className={`text-[13px] font-bold font-figtree transition-colors ${
+                                      isCurrent
+                                        ? "text-[#9CB05A]"
+                                        : "text-white group-hover/item:text-[#9CB05A]"
+                                    }`}
+                                  >
+                                    {service.name}
+                                  </h5>
+                                </Link>
+                              );
+                            })}
                           </div>
                         </div>
 
-                        {/* Right: Featured Dark Card */}
-                        <div className="w-[188px] flex-shrink-0 bg-gradient-to-br from-[#0B130D] via-[#142217] to-[#1E3322] border-l border-[#9CB05A]/15 p-5 flex flex-col justify-between relative overflow-hidden">
-                          <div className="absolute top-0 right-0 w-28 h-28 rounded-full opacity-20 pointer-events-none bg-[radial-gradient(circle,#9CB05A,transparent_70%)]" />
-                          <div className="flex flex-col gap-3 relative z-10">
-                            <span className="inline-flex items-center rounded-full bg-[#9CB05A]/20 text-[#9CB05A] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-[#9CB05A]/30 w-fit font-figtree">
+                        {/* Right: Featured Card with Image Visibility */}
+                        <div className="w-[280px] flex-shrink-0 p-4 sm:p-4.5 flex flex-col justify-between relative bg-gradient-to-t from-[#0A140D]/95 via-[#0A140D]/50 to-transparent">
+                          <div className="flex flex-col relative z-10">
+                            <span className="inline-flex items-center rounded-full bg-[#1A2D1E]/90 text-[#9CB05A] px-2.5 py-0.5 text-[9.5px] font-bold uppercase tracking-widest border border-[#9CB05A]/30 w-fit font-figtree backdrop-blur-sm shadow-sm">
                               Free Call
                             </span>
-                            <h4 className="text-sm font-extrabold font-figtree text-white leading-snug">
-                              Not Sure Which Service You Need?
+
+                            <h4 className="text-[15px] font-bold font-figtree text-white leading-tight mt-1.5 drop-shadow-md">
+                              Not Sure Which<br />Service You Need?
                             </h4>
-                            <p className="text-white/70 text-[11px] font-manrope leading-relaxed">
+
+                            <div className="w-6 h-[2px] bg-[#9CB05A] rounded-full my-1.5 shadow-sm" />
+
+                            <p className="text-white/85 text-[11px] leading-snug font-manrope drop-shadow-sm">
                               Book a 15-min discovery call — no obligation, no cost.
                             </p>
                           </div>
-                          <div className="flex flex-col gap-2 mt-5 relative z-10">
+
+                          <div className="flex flex-col gap-2.5 mt-3 relative z-10">
                             <Link
                               href="/contact"
                               onClick={() => setIsServicesOpen(false)}
-                              className="inline-flex items-center justify-center bg-[#9CB05A] hover:bg-[#8CA04A] text-[#0E1710] text-[11px] font-extrabold font-figtree py-2.5 px-3 rounded-xl transition-all duration-200 shadow-sm"
+                              className="inline-flex items-center justify-between bg-[#9CB05A] hover:bg-[#8CA04A] text-[#0E1710] text-[11.5px] font-extrabold font-figtree pl-3.5 pr-1 py-1 rounded-full transition-all duration-200 shadow-lg group/btn"
                             >
-                              Book Free Strategy Call
+                              <span>Book Free Strategy Call</span>
+                              <span className="w-6 h-6 rounded-full bg-white/95 flex items-center justify-center text-[#0E1710] group-hover/btn:rotate-12 transition-transform shadow">
+                                <FiPhoneCall className="text-xs" />
+                              </span>
                             </Link>
+
+                            <div className="flex items-center gap-1.5 text-white/80 text-[10px] font-manrope drop-shadow-sm">
+                              <RiShieldCheckLine className="text-[#9CB05A] text-sm flex-shrink-0" />
+                              <span>Trusted by Businesses Across the U.S.</span>
+                            </div>
                           </div>
                         </div>
                       </div>

@@ -2,20 +2,16 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import darkbg from "@/assets/images/darkbg.png";
 
 export default function BlogHeader() {
   const categories = ["All Topics", "Tax Planning", "Tax Compliance", "Small Business Accounting", "Gusto Payroll", "Fractional CFO", "IRS Updates"];
 
   return (
-    <section
-      className="relative pt-36 pb-20 flex flex-col items-center justify-center text-center overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #122115 0%, #1e3a24 50%, #2d5234 100%)",
-      }}
-    >
-      {/* Decorative glows */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-10 pointer-events-none" style={{ background: "radial-gradient(circle, #9CB05A, transparent 70%)" }} />
-      <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-10 pointer-events-none" style={{ background: "radial-gradient(circle, #d4af37, transparent 70%)" }} />
+    <section className="relative pt-36 pb-20 flex flex-col items-center justify-center text-center overflow-hidden">
+      <Image src={darkbg} alt="Blog | VS Tax CPA LLC" fill priority className="object-cover object-center pointer-events-none" />
+      <div className="absolute inset-0 bg-[#0E1710]/30 pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center gap-6">
         <motion.div
