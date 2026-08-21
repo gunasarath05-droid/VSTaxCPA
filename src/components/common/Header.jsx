@@ -68,24 +68,22 @@ export default function Header() {
     return pathname.startsWith(href);
   };
 
-  // Nav text color depending on sticky state and page background
-  const navTextColor = isSticky
-    ? "text-dark hover:text-primary"
-    : isDarkHero
-    ? "text-white/90 hover:text-white"
-    : "text-dark hover:text-primary";
+  // Nav text color: consistently clear light text with gold hover matching bg-[#0E1710]
+  const navTextColor = "text-[#FAF9F2]/90 hover:text-[#9CB05A]";
 
-  // Logo: When sticky or on light homepage -> dark Logo.png; on transparent dark hero -> white Logo1.png
-  const logoSrc = isSticky || !isDarkHero ? "/Logo.png" : "/Logo1.png";
+  // Logo: Exclusively use /Logo1.png across the entire website
+  const logoSrc = "/Logo1.png";
 
   return (
     <>
       {/* ── Main Header ── */}
       <header
-        className={`fixed top-0 left-0 w-full z-40 transition-all duration-400 ${
+        className={`fixed top-0 left-0 w-full z-40 transition-all duration-400 ease-in-out ${
           isSticky
-            ? "bg-white/98 shadow-md border-b border-slate-100 py-3 backdrop-blur-md"
-            : "bg-transparent py-4 sm:py-5"
+            ? "bg-[#0E1710]/85 backdrop-blur-xl shadow-[0_10px_30px_-5px_rgba(0,0,0,0.6)] border-b border-[#9CB05A]/25 py-2.5 sm:py-3"
+            : isDarkHero
+            ? "bg-transparent py-4 sm:py-5 border-b border-transparent"
+            : "bg-[#0E1710]/95 backdrop-blur-md shadow-sm border-b border-[#9CB05A]/15 py-3.5 sm:py-4"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
@@ -119,11 +117,7 @@ export default function Header() {
                   >
                     <button
                       className={`flex items-center gap-1.5 text-[15px] font-semibold font-figtree transition-all duration-300 py-2 cursor-pointer ${navTextColor} ${
-                        active
-                          ? isSticky || !isDarkHero
-                            ? "!text-primary font-bold"
-                            : "!text-secondary font-bold"
-                          : ""
+                        active ? "!text-[#9CB05A] font-bold" : ""
                       }`}
                     >
                       <span>{item.name}</span>
@@ -135,9 +129,9 @@ export default function Header() {
 
                     {/* Underline */}
                     <span
-                      className={`absolute bottom-0 left-0 h-[2px] transition-all duration-300 ${
-                        isSticky || !isDarkHero ? "bg-primary" : "bg-secondary"
-                      } ${active ? "w-full" : "w-0"}`}
+                      className={`absolute bottom-0 left-0 h-[2px] transition-all duration-300 bg-[#9CB05A] ${
+                        active ? "w-full" : "w-0"
+                      }`}
                     />
 
                     {/* Transparent bridge — fills the gap so mouse doesn't leave on way to dropdown */}
@@ -145,7 +139,7 @@ export default function Header() {
 
                     {/* ── Mega Dropdown ── */}
                     <div
-                      className={`absolute top-[calc(100%+2px)] left-1/2 -translate-x-1/2 w-[600px] bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transition-all duration-200 origin-top ${
+                      className={`absolute top-[calc(100%+2px)] left-1/2 -translate-x-1/2 w-[600px] bg-[#121E14]/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-[#9CB05A]/25 overflow-hidden transition-all duration-200 origin-top ${
                         isServicesOpen
                           ? "opacity-100 scale-100 pointer-events-auto translate-y-0"
                           : "opacity-0 scale-95 pointer-events-none -translate-y-1"
@@ -162,15 +156,15 @@ export default function Header() {
                                 onClick={() => setIsServicesOpen(false)}
                                 className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[12.5px] font-semibold font-figtree transition-all duration-150 group/item ${
                                   pathname === service.href
-                                    ? "bg-primary text-white"
-                                    : "text-dark hover:bg-[#FAF9F5] hover:text-primary"
+                                    ? "bg-[#9CB05A] text-[#0E1710] font-bold"
+                                    : "text-[#FAF9F2]/90 hover:bg-[#1C2C1E] hover:text-[#9CB05A]"
                                 }`}
                               >
                                 <span
                                   className={`w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors ${
                                     pathname === service.href
-                                      ? "bg-secondary"
-                                      : "bg-primary/30 group-hover/item:bg-secondary"
+                                      ? "bg-[#0E1710]"
+                                      : "bg-[#9CB05A]/40 group-hover/item:bg-[#9CB05A]"
                                   }`}
                                 />
                                 {service.name}
@@ -180,16 +174,16 @@ export default function Header() {
                         </div>
 
                         {/* Right: Featured Dark Card */}
-                        <div className="w-[188px] flex-shrink-0 bg-gradient-to-br from-[#122115] via-[#1e3a24] to-[#2d5234] p-5 flex flex-col justify-between relative overflow-hidden">
+                        <div className="w-[188px] flex-shrink-0 bg-gradient-to-br from-[#0B130D] via-[#142217] to-[#1E3322] border-l border-[#9CB05A]/15 p-5 flex flex-col justify-between relative overflow-hidden">
                           <div className="absolute top-0 right-0 w-28 h-28 rounded-full opacity-20 pointer-events-none bg-[radial-gradient(circle,#9CB05A,transparent_70%)]" />
                           <div className="flex flex-col gap-3 relative z-10">
-                            <span className="inline-flex items-center rounded-full bg-secondary/20 text-secondary px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 w-fit font-figtree">
+                            <span className="inline-flex items-center rounded-full bg-[#9CB05A]/20 text-[#9CB05A] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border border-[#9CB05A]/30 w-fit font-figtree">
                               Free Call
                             </span>
                             <h4 className="text-sm font-extrabold font-figtree text-white leading-snug">
                               Not Sure Which Service You Need?
                             </h4>
-                            <p className="text-white/60 text-[11px] font-manrope leading-relaxed">
+                            <p className="text-white/70 text-[11px] font-manrope leading-relaxed">
                               Book a 15-min discovery call — no obligation, no cost.
                             </p>
                           </div>
@@ -197,7 +191,7 @@ export default function Header() {
                             <Link
                               href="/contact"
                               onClick={() => setIsServicesOpen(false)}
-                              className="inline-flex items-center justify-center bg-secondary hover:bg-[#8CA04A] text-dark text-[11px] font-extrabold font-figtree py-2.5 px-3 rounded-xl transition-all duration-200 shadow-sm"
+                              className="inline-flex items-center justify-center bg-[#9CB05A] hover:bg-[#8CA04A] text-[#0E1710] text-[11px] font-extrabold font-figtree py-2.5 px-3 rounded-xl transition-all duration-200 shadow-sm"
                             >
                               Book Free Strategy Call
                             </Link>
@@ -214,19 +208,15 @@ export default function Header() {
                   <Link
                     href={item.href}
                     className={`text-[15px] font-semibold font-figtree transition-all duration-300 py-2 block ${navTextColor} ${
-                      active
-                        ? isSticky || !isDarkHero
-                          ? "!text-primary font-bold"
-                          : "!text-secondary font-bold"
-                        : ""
+                      active ? "!text-[#9CB05A] font-bold" : ""
                     }`}
                   >
                     {item.name}
                   </Link>
                   <span
-                    className={`absolute bottom-0 left-0 h-[2px] transition-all duration-300 ${
-                      isSticky || !isDarkHero ? "bg-primary" : "bg-secondary"
-                    } ${active ? "w-full" : "w-0 group-hover:w-full"}`}
+                    className={`absolute bottom-0 left-0 h-[2px] transition-all duration-300 bg-[#9CB05A] ${
+                      active ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
                   />
                 </div>
               );
@@ -243,15 +233,15 @@ export default function Header() {
               aria-label="Open Info Panel"
               className="hidden lg:flex flex-col gap-1.5 cursor-pointer justify-center items-end group p-1"
             >
-              <span className={`w-6 h-[2px] transition-all group-hover:w-8 ${isSticky || !isDarkHero ? "bg-dark" : "bg-white"}`} />
-              <span className={`w-8 h-[2px] ${isSticky || !isDarkHero ? "bg-dark" : "bg-white"}`} />
-              <span className={`w-5 h-[2px] transition-all group-hover:w-8 ${isSticky || !isDarkHero ? "bg-dark" : "bg-white"}`} />
+              <span className="w-6 h-[2px] transition-all group-hover:w-8 bg-[#FAF9F2] group-hover:bg-[#9CB05A]" />
+              <span className="w-8 h-[2px] bg-[#FAF9F2] group-hover:bg-[#9CB05A]" />
+              <span className="w-5 h-[2px] transition-all group-hover:w-8 bg-[#FAF9F2] group-hover:bg-[#9CB05A]" />
             </button>
 
             {/* CTA Button */}
             <Link
               href="/contact"
-              className="hidden sm:inline-flex items-center justify-center bg-secondary hover:bg-[#8CA04A] text-dark text-xs sm:text-sm font-bold font-figtree px-5 sm:px-6 py-2.5 rounded-full shadow-lg hover:scale-[1.03] active:scale-95 transition-all duration-300"
+              className="hidden sm:inline-flex items-center justify-center bg-[#9CB05A] hover:bg-[#8CA04A] text-[#0E1710] text-xs sm:text-sm font-bold font-figtree px-5 sm:px-6 py-2.5 rounded-full shadow-[0_4px_14px_rgba(156,176,90,0.35)] hover:scale-[1.03] active:scale-95 transition-all duration-300"
             >
               Free Consultation
             </Link>
@@ -260,9 +250,7 @@ export default function Header() {
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open Menu"
-              className={`lg:hidden text-2xl cursor-pointer p-1.5 transition-colors ${
-                isSticky || !isDarkHero ? "text-dark" : "text-white"
-              }`}
+              className="lg:hidden text-2xl cursor-pointer p-1.5 transition-colors text-[#FAF9F2] hover:text-[#9CB05A]"
             >
               <HiOutlineMenuAlt3 />
             </button>
@@ -273,7 +261,7 @@ export default function Header() {
 
       {/* ── Mobile Backdrop ── */}
       <div
-        className={`fixed inset-0 bg-dark/60 z-50 transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 bg-dark/70 backdrop-blur-sm z-50 transition-opacity duration-300 lg:hidden ${
           isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
@@ -281,14 +269,14 @@ export default function Header() {
 
       {/* ── Mobile Drawer ── */}
       <div
-        className={`fixed top-0 right-0 h-full w-[300px] bg-white z-[60] shadow-2xl flex flex-col transition-transform duration-500 ${
+        className={`fixed top-0 right-0 h-full w-[300px] bg-[#0E1710] text-[#FAF9F2] border-l border-[#9CB05A]/20 z-[60] shadow-2xl flex flex-col transition-transform duration-500 ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Drawer Header */}
-        <div className="flex items-center justify-between px-7 py-5 border-b border-slate-100">
+        <div className="flex items-center justify-between px-7 py-5 border-b border-[#9CB05A]/15">
           <Image
-            src="/Logo.png"
+            src="/Logo1.png"
             alt="VS Tax CPA LLC"
             width={140}
             height={40}
@@ -297,7 +285,7 @@ export default function Header() {
           />
           <button
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-2xl text-dark hover:text-primary transition-colors cursor-pointer"
+            className="text-2xl text-[#FAF9F2] hover:text-[#9CB05A] transition-colors cursor-pointer"
           >
             <IoCloseOutline />
           </button>
@@ -315,7 +303,7 @@ export default function Header() {
                     <button
                       onClick={() => setIsMobileServicesOpen((p) => !p)}
                       className={`w-full flex items-center justify-between text-[15px] font-semibold font-figtree py-3 transition-colors cursor-pointer ${
-                        active ? "text-primary font-bold" : "text-dark hover:text-primary"
+                        active ? "text-[#9CB05A] font-bold" : "text-[#FAF9F2]/90 hover:text-[#9CB05A]"
                       }`}
                     >
                       {item.name}
@@ -334,7 +322,7 @@ export default function Header() {
                           <Link
                             href="/services"
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="text-xs font-bold text-primary block py-2"
+                            className="text-xs font-bold text-[#9CB05A] block py-2"
                           >
                             ➔ All Services Catalog
                           </Link>
@@ -345,10 +333,10 @@ export default function Header() {
                               href={s.href}
                               onClick={() => setIsMobileMenuOpen(false)}
                               className={`flex items-center gap-2 text-sm py-2 font-medium transition-colors ${
-                                pathname === s.href ? "text-primary font-bold" : "text-slate-600 hover:text-primary"
+                                pathname === s.href ? "text-[#9CB05A] font-bold" : "text-gray-300 hover:text-[#9CB05A]"
                               }`}
                             >
-                              <span className="w-1 h-1 rounded-full bg-secondary" />
+                              <span className="w-1 h-1 rounded-full bg-[#9CB05A]" />
                               {s.name}
                             </Link>
                           </li>
@@ -364,8 +352,8 @@ export default function Header() {
                   <Link
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`text-[15px] font-semibold font-figtree py-3 block transition-colors border-b border-slate-50 ${
-                      active ? "text-primary font-bold" : "text-dark hover:text-primary"
+                    className={`text-[15px] font-semibold font-figtree py-3 block transition-colors border-b border-[#1E2E21] ${
+                      active ? "text-[#9CB05A] font-bold" : "text-[#FAF9F2]/90 hover:text-[#9CB05A]"
                     }`}
                   >
                     {item.name}
@@ -377,11 +365,11 @@ export default function Header() {
         </nav>
 
         {/* Mobile CTA */}
-        <div className="px-7 py-5 border-t border-slate-100">
+        <div className="px-7 py-5 border-t border-[#9CB05A]/15">
           <Link
             href="/contact"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="bg-primary hover:bg-secondary text-white text-center py-3.5 rounded-full font-bold text-sm block transition-all duration-300 shadow-lg"
+            className="bg-[#9CB05A] hover:bg-[#8CA04A] text-[#0E1710] text-center py-3.5 rounded-full font-bold text-sm block transition-all duration-300 shadow-lg"
           >
             Book Free Consultation
           </Link>
@@ -390,7 +378,7 @@ export default function Header() {
 
       {/* ── Desktop Info Sidebar Backdrop ── */}
       <div
-        className={`fixed inset-0 bg-dark/40 z-40 transition-opacity duration-300 hidden lg:block ${
+        className={`fixed inset-0 bg-dark/60 backdrop-blur-sm z-40 transition-opacity duration-300 hidden lg:block ${
           isSidebarOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsSidebarOpen(false)}
@@ -398,14 +386,14 @@ export default function Header() {
 
       {/* ── Desktop Info Sidebar ── */}
       <div
-        className={`fixed top-0 right-0 h-full w-[380px] bg-white z-50 shadow-2xl flex flex-col transition-transform duration-500 ${
+        className={`fixed top-0 right-0 h-full w-[380px] bg-[#0E1710] text-[#FAF9F2] border-l border-[#9CB05A]/20 z-50 shadow-2xl flex flex-col transition-transform duration-500 ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Sidebar Header */}
-        <div className="flex items-center justify-between px-8 py-6 border-b border-slate-100">
+        <div className="flex items-center justify-between px-8 py-6 border-b border-[#9CB05A]/15">
           <Image
-            src="/Logo.png"
+            src="/Logo1.png"
             alt="VS Tax CPA LLC"
             width={160}
             height={45}
@@ -414,7 +402,7 @@ export default function Header() {
           />
           <button
             onClick={() => setIsSidebarOpen(false)}
-            className="text-2xl text-dark hover:text-primary transition-colors cursor-pointer"
+            className="text-2xl text-[#FAF9F2] hover:text-[#9CB05A] transition-colors cursor-pointer"
           >
             <IoCloseOutline />
           </button>
@@ -424,52 +412,52 @@ export default function Header() {
 
           {/* About blurb */}
           <div className="flex flex-col gap-3">
-            <h4 className="text-lg font-bold font-figtree text-dark pb-2 border-b border-slate-100">
+            <h4 className="text-lg font-bold font-figtree text-[#FAF9F2] pb-2 border-b border-[#9CB05A]/15">
               VS Tax CPA LLC
             </h4>
-            <p className="text-sm text-body-text leading-relaxed">
+            <p className="text-sm text-gray-300 leading-relaxed font-manrope">
               A forward-thinking CPA firm founded by Vethavalli Ramakrishnan, CPA — licensed by the Texas State Board of Public Accountancy. We deliver reliable, accurate, and strategic tax and accounting services for individuals and businesses in Irving, TX and beyond.
             </p>
           </div>
 
           {/* Contact Info */}
           <div className="flex flex-col gap-4">
-            <h4 className="text-lg font-bold font-figtree text-dark pb-2 border-b border-slate-100">
+            <h4 className="text-lg font-bold font-figtree text-[#FAF9F2] pb-2 border-b border-[#9CB05A]/15">
               Contact Info
             </h4>
-            <div className="flex flex-col gap-4 text-sm">
+            <div className="flex flex-col gap-4 text-sm font-manrope">
               <div className="flex items-start gap-3">
-                <FiPhone className="text-secondary mt-0.5 flex-shrink-0" size={14} />
+                <FiPhone className="text-[#9CB05A] mt-0.5 flex-shrink-0" size={14} />
                 <div>
-                  <p className="text-slate-400 uppercase text-[10px] font-bold tracking-wider mb-1">Phone</p>
-                  <a href="tel:+14694716580" className="text-dark font-semibold hover:text-primary transition">
+                  <p className="text-[#9CB05A] uppercase text-[10px] font-bold tracking-wider mb-1">Phone</p>
+                  <a href="tel:+14694716580" className="text-[#FAF9F2] font-semibold hover:text-[#9CB05A] transition">
                     +1 (469) 471-6580
                   </a>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <FiMail className="text-secondary mt-0.5 flex-shrink-0" size={14} />
+                <FiMail className="text-[#9CB05A] mt-0.5 flex-shrink-0" size={14} />
                 <div>
-                  <p className="text-slate-400 uppercase text-[10px] font-bold tracking-wider mb-1">Email</p>
-                  <a href="mailto:info@vstaxcpa.com" className="text-dark font-semibold hover:text-primary transition break-all">
+                  <p className="text-[#9CB05A] uppercase text-[10px] font-bold tracking-wider mb-1">Email</p>
+                  <a href="mailto:info@vstaxcpa.com" className="text-[#FAF9F2] font-semibold hover:text-[#9CB05A] transition break-all">
                     info@vstaxcpa.com
                   </a>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <FiMapPin className="text-secondary mt-0.5 flex-shrink-0" size={14} />
+                <FiMapPin className="text-[#9CB05A] mt-0.5 flex-shrink-0" size={14} />
                 <div>
-                  <p className="text-slate-400 uppercase text-[10px] font-bold tracking-wider mb-1">Irving, TX Office</p>
-                  <p className="text-dark font-medium leading-relaxed">
+                  <p className="text-[#9CB05A] uppercase text-[10px] font-bold tracking-wider mb-1">Irving, TX Office</p>
+                  <p className="text-gray-300 font-medium leading-relaxed">
                     3035 Ivy Hill Lane,<br />Irving, TX 75063
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <FiClock className="text-secondary mt-0.5 flex-shrink-0" size={14} />
+                <FiClock className="text-[#9CB05A] mt-0.5 flex-shrink-0" size={14} />
                 <div>
-                  <p className="text-slate-400 uppercase text-[10px] font-bold tracking-wider mb-1">Working Hours</p>
-                  <p className="text-dark font-medium">Mon–Fri: 9:00 AM – 5:30 PM CST</p>
+                  <p className="text-[#9CB05A] uppercase text-[10px] font-bold tracking-wider mb-1">Working Hours</p>
+                  <p className="text-gray-300 font-medium">Mon–Fri: 9:00 AM – 5:30 PM CST</p>
                 </div>
               </div>
             </div>
@@ -477,7 +465,7 @@ export default function Header() {
 
           {/* Social links */}
           <div className="flex flex-col gap-4">
-            <h4 className="text-lg font-bold font-figtree text-dark pb-2 border-b border-slate-100">
+            <h4 className="text-lg font-bold font-figtree text-[#FAF9F2] pb-2 border-b border-[#9CB05A]/15">
               Follow Us
             </h4>
             <div className="flex items-center gap-3">
@@ -493,7 +481,7 @@ export default function Header() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={s.label}
-                  className="w-10 h-10 rounded-full border border-slate-200 text-slate-500 hover:text-white hover:bg-primary hover:border-primary flex items-center justify-center transition-all duration-300 text-sm"
+                  className="w-10 h-10 rounded-full border border-[#9CB05A]/30 text-gray-300 hover:text-[#0E1710] hover:bg-[#9CB05A] hover:border-[#9CB05A] flex items-center justify-center transition-all duration-300 text-sm"
                 >
                   {s.icon}
                 </a>
@@ -504,11 +492,11 @@ export default function Header() {
         </div>
 
         {/* Sidebar CTA */}
-        <div className="px-8 py-6 border-t border-slate-100">
+        <div className="px-8 py-6 border-t border-[#9CB05A]/15">
           <Link
             href="/contact"
             onClick={() => setIsSidebarOpen(false)}
-            className="bg-primary hover:bg-secondary text-white text-center py-4 rounded-full font-bold text-sm block transition-all duration-300 shadow-lg"
+            className="bg-[#9CB05A] hover:bg-[#8CA04A] text-[#0E1710] text-center py-4 rounded-full font-bold text-sm block transition-all duration-300 shadow-lg"
           >
             Book a Free Tax Strategy Call
           </Link>
